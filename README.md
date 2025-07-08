@@ -116,14 +116,91 @@ This phase focused on secureing user identities, simulating real-world IAM (Iden
 - How to monitor identity-related events and incidents
 - How to audit changes to user or group configuration
 - How to trace security incidents using native Entra tools
+---
 
+## 6: Assign Custom Admin Role
+
+### Objective: 
+Simulate **role-based access control** by assigning it to Admin Miku user.
+- Select user and assgin role `Password Administrator` that can reset password for non-administrator and administrator to `Admin.Miku@Miku39.it.com`
+![2 assigned role](https://github.com/user-attachments/assets/d215c5a0-eb2f-4fce-836c-d1f7d050d628)
+
+### Test Results:
+- User can reset anothe user's password with high privilege
+![3 reset passord for Intenrn01 Brian](https://github.com/user-attachments/assets/98a6ddd4-0d43-48c3-a55f-04aefb8ab3fd)
+
+- Other user that didn't have that role cannot reset password
+![4  another account with no role](https://github.com/user-attachments/assets/3a7eea3c-0936-47fd-9967-21b27d64e516)
+
+### What I learn:
+- Implement **Least privilege** access
+- Creating and testing **Custom roles in Entra**
+- Realistic simulation
+---
+
+## 7: Confirgue DLP Policy for Sensitive Info
+
+### Objective:
+Block and warn user about email and file sharing that contain **financial data**, such as credit card number, ..., from being sent outside the organization
+
+- Create a DLP policy using Microsoft Purview
+- Used the "Australia Financial data" template
+- Enabled monitoring on:
+  - Exchange Email
+  - Sharepoint site
+  - OneDrive account
+  - Teams chat and channel messages
+  - Devices
+  - Microsoft Defender for Cloud Apps
+  - On-premiese repositories
+- Action: Warn user and block email
+![6  finish set up policies](https://github.com/user-attachments/assets/92b31c59-eff2-4c1b-b7de-1e0f85cfa949)
+
+
+### Test Results:
+- Email contaning test credit cxard numbers sent to test Gmail account --> was warn and block
+![7  make a test to send fake credit card number to gmail com](https://github.com/user-attachments/assets/ea25554f-741d-441f-862c-4bfe7173c4ac)
+![recieve warning from microsoft outllook](https://github.com/user-attachments/assets/92c4e5ee-6f08-4786-9cda-6202cb808d6d)
+- Aleart was sent to admin mailbox
+
+### What I learned
+- How Microsoft detects **sensitive info types**
+- Creating **compliance policies**
+- Real-world application of **data governance and insider threat prevention**
+---
+
+## 8.Safe Links and Safe Attachments Protection
+
+### Objective:
+Protect users from phishing emails and malicious file attachments using **Microsoft Defender for Office 365**.
+
+#### Safe Links Policy
+- Enabled URL scanning in emails, Teams, OneDrive, and Office docs
+- Disabled user override for malicious links
+![create safe link policy](https://github.com/user-attachments/assets/97d69ca0-5294-46a4-9a3a-5d7b40509342)
+
+#### Safe Attachments Policy
+- Enabled sandboxing with **Dynamic Delivery**
+- Applied to all users
+![Create safe attachment](https://github.com/user-attachments/assets/63d45ade-1fc3-4f91-ad20-5203e64db859)
+
+### Test Results:
+- Links in external emails were rewritten and scanned
+- Attachments were delayed before delivery for scanning
+- Unsafe links triggered Defender warnings
+
+### What I Learned:
+- How Safe Links protect against **phishing** and **malware**
+- How Safe Attachments sandbox files before delivery
+- This mirrors **email protection controls used by real SOC teams**
+---
 
 ## Screenshots
 - I will update soon
 ---
 
 ## Skills Practiced
-- MIcrosoft 365 Administration
+- Microsoft 365 Administration
 - DNS configuration (MX, SPF, CNAME)
 - Exchange Online mail flow
 - Helpdesk simulation
@@ -133,6 +210,10 @@ This phase focused on secureing user identities, simulating real-world IAM (Iden
 - Enforce MFA for all user account
 - Implemented self-service recovery
 - Monitored and audited user activity
+- Microsoft Entra ID
+- Role-Based Access Control in Microsoft 365
+- Policy testing and validation
+- Realistic simulation of enterprise security controls
 ---
 
 ## Notes
